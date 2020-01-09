@@ -42,7 +42,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths: .
-  terrafrom_apply:
+  terraform_apply:
     <<: *tfconfig
     steps:
       - attach_workspace:
