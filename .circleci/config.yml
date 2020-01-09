@@ -24,7 +24,7 @@ jobs:
       - checkout
       - run:
           name: terraform_init
-          command: terraform init -input=false
+          command: cd terraform && terraform init -input=false
       - persist_to_workspace:
           root: ~/repo
           paths: .
@@ -35,7 +35,7 @@ jobs:
           at: ~/repo
       - run:
           name: terraform_plan
-          command: terraform plan -no-color -out=tfplan  -input=false
+          command: cd terraform && terraform plan -no-color -out=tfplan  -input=false
       - store_artifacts:
           path: ~/repo/tfplan
           destination: tfplan
@@ -49,10 +49,10 @@ jobs:
           at: ~/repo
       - run:
           name: terraform_apply
-          command: terraform apply -input=false -auto-approve tfplan
+          command: cd terraform && terraform apply -input=false -auto-approve tfplan
       - run:
           name: terraform show
-          command: terraform show -no-color > tfresult
+          command: cd terraform && terraform show -no-color > tfresult
       - store_artifacts:
           path: ~/repo/tfresult
           destination: tfresult
