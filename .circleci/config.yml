@@ -1,7 +1,14 @@
 version: 2
+
 defaults: &defaults
   working_directory: ~/repo
 #  environment:
+
+tfconfig: &tfconfig
+    <<: *defaults
+    docker: 
+      - image: hashicorp/terraform:light
+
 jobs:
   build_image:
     <<: *defaults
@@ -12,7 +19,7 @@ jobs:
       - run:
           packer build ./packer/ec2_image.json
   terraform_init:
-    <<: *defaults
+    <<: *tfconfig
     steps:
       - checkout
       - run:
@@ -22,7 +29,7 @@ jobs:
           root: ~/repo
           paths: .
   terraform_plan:
-    <<: *defaults
+    <<: *tfconfig
     steps:
       - attach_workspace:
           at: ~/repo
@@ -36,7 +43,7 @@ jobs:
           root: ~/repo
           paths: .
   terrafrom_apply:
-    <<: *defaults
+    <<: *tfconfig
     steps:
       - attach_workspace:
           at: ~/repo
@@ -44,7 +51,7 @@ jobs:
           name: terraform_apply
           command: terraform apply -input=false -auto-approve tfplan
       - run:
-          name: show
+          name: terraform show
           command: terraform show -no-color > tfresult
       - store_artifacts:
           path: ~/repo/tfresult
@@ -55,13 +62,15 @@ workflows:
   build_deploy:
     jobs:
       - build_image
-      - init
-      - plan:
+      - terraform_init:
           requires:
-            - init
-      - apply:
+            - build_image
+      - terraform_plan:
           requires:
-            - plan
+            - terraform_init
+      - terraform_apply:
+          requires:
+            - terraform_plan
           filters:
             branches:
               only: 
