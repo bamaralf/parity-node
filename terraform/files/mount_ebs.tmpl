@@ -1,0 +1,5 @@
+#!/bin/bash
+mkfs -t ext4 /dev/xvd${drive_letter}
+mkdir /data
+mount /dev/xvd${drive_letter} /data
+echo /dev/xvd${drive_letter}  /data ext4 defaults,nofail 0 2 >> /etc/fstab

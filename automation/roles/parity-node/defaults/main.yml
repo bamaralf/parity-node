@@ -1,0 +1,7 @@
+---
+# defaults file for parity-node
+parity:
+  version_stable: 2.5.13
+  version_beta: 2.6.8
+
+release: stable

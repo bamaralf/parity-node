@@ -1,0 +1,11 @@
+---
+- hosts: all
+  # vars:
+  #   parity:
+  #     version_stable: 2.5.13
+  #     version_beta: 2.6.8
+  #   release: stable
+  remote_user: root
+  tasks:
+  - import_role:
+      name: parity-node

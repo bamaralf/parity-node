@@ -1,0 +1,47 @@
+[parity]
+mode = "last"
+mode_timeout = 300
+mode_alarm = 3600
+auto_update = "critical"
+release_track = "current"
+public_node = false
+no_download = false
+no_consensus = false
+no_persistent_txqueue = false
+
+chain = "kovan"
+base_path = "/data/io.parity.ethereum"
+db_path = "/data/io.parity.ethereum/chains"
+keys_path = "/data/io.parity.ethereum/keys"
+identity = ""
+light = false
+
+[rpc]
+disable = false
+port = 8545
+interface = "all"
+cors = []
+apis = ["web3", "eth", "pubsub", "net", "parity", "parity_pubsub", "traces", "rpc", "shh", "shh_pubsub"]
+#hosts = ["none"]
+
+[websockets]
+disable = false
+port = 8546
+interface = "all"
+#origins = ["none"]
+apis = ["web3", "eth", "pubsub", "net", "parity", "parity_pubsub", "traces", "rpc", "shh", "shh_pubsub"]
+#hosts = ["none"]
+
+[ipc]
+disable = false
+path = "/data/io.parity.ethereum/jsonrpc.ipc"
+apis = ["web3", "eth", "pubsub", "net", "parity", "parity_pubsub", "parity_accounts", "traces", "rpc", "shh", "shh_pubsub"]
+
+[dapps]
+disable = false
+path = "/data/io.parity.ethereum/dapps"
+
+[misc]
+logging = "own_tx=trace"
+log_file = "/var/log/parity.log"
+color = true

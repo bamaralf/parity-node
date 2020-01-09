@@ -1,0 +1,44 @@
+---
+# tasks file for parity-node
+- name: Install packages
+  become: yes
+  apt:
+    name: curl
+    state: present
+ 
+- name: Render parity_install.sh script
+  template:
+    src: ./templates/parity_install.j2
+    dest: ./parity_install.sh
+    mode: '0755'
+ 
+- name: Install Parity
+  shell: "./parity_install.sh"
+
+- name: Render parity service
+  template:
+    src: ./templates/parity_service.j2
+    dest: /etc/systemd/system/parity.service
+    mode: '0755'
+  become: yes
+
+- name: Create directory 
+  file:
+    path: /etc/parity
+    state: directory
+  become: yes
+
+- name: Render parity config
+  template:
+    src: ./templates/config_toml.j2
+    dest: /etc/parity/config.toml
+    mode: '0755'
+  become: yes
+
+- name: Enable parity service
+  service: name=parity enabled=yes
+  become: yes
+
+- name: Start parity
+  service: name=parity state=started
+  become: yes
