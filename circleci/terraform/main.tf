@@ -22,6 +22,6 @@ resource "circleci_environment_variable" "aws_secret_access_key" {
 
 resource "circleci_environment_variable" "public_key" {
   project = var.circleci_project
-  name    = "TF_VAR_PUBLIC_KEY"
+  name    = "TF_VAR_public_key"
   value   = var.public_key
 }
