@@ -75,7 +75,7 @@ resource "aws_eip" "this" {
 
 resource "aws_key_pair" "ec2_key" {
   key_name   = "parity-ec2-key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCkKx8xfW//qwcoAeXsVkL2ANiRGcddSQrTBSMBgcALlmC5ixXdDdi2NcoLQlEkuoldmOokoJKWjxXMZt9WWOshbpy+3gzS3cEqGWGPZQN+meh/sw7/OPh3WEvum7ZXZNZ1FF08ed88lidtTQjmGTAs9OQUKBHqt1BPM+UV5ZcGVUtuflshZ8fBh/q6I5rIge+SEU7jYlbC9851EcIvrON8UH92aRaE24OcdshmhOTzsJH6Vogla1mGVszQJTrSzRraXWLbDh6n30wNZHsaOjrk+mv6Hhmipuxw8DyzzfFKT7g2hSSO1tj3hhvX6zhLL3ACIWYCfvzXuXIaQr1nQRr586V6V5aaVyhX3wYc4wprANUyy2P6m1u7to9x5F+IQEm/Al0SOUTx6/rDtdSBgdDAOvd4AvNP02TiHzIxVwq/lEH2+yzQhUcx7lTYAtiw/z8Q9Nsq4t4xW8ieGVn8CPykS7pl7pdfRbRVLp1pcppJE65P9cHhnAKIz9BEu2T/un8Nfpdk09eFcay2vDKv8B7WKgwV4SR6QZDDK5ygq35uAG7UlEtZjD0Bz3l6ClPVD0u7sIgkvnFZJHXNxr6Hp9h6YESzxXfBhoL4okiuO0lSG1KdCAM5sriD9gTTQsTrSeFXYHj3nCtuwoNc2LXHI8tcYcJ8ikdRIzZxVwW9LbPNSQ== bamaral@local-pc"
+  public_key = var.public_key
 }
 
 resource "aws_kms_key" "this" {
@@ -109,7 +109,7 @@ module "ec2" {
     {
       device_name = "/dev/sd${var.drive_letter}"
       volume_type = "gp2"
-      volume_size = 10
+      volume_size = 500
       encrypted   = true
       kms_key_id  = aws_kms_key.this.arn
     }
