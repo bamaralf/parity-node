@@ -28,7 +28,7 @@
     "provisioners":[
         {
           "type": "ansible",
-          "playbook_file": "../automation/parity_install.yml",
+          "playbook_file": "./automation/parity_install.yml",
           "extra_arguments": [ "--extra-vars", "ansible_python_interpreter=/usr/bin/python3" ]
         }
      ]
