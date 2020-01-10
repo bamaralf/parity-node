@@ -5,4 +5,5 @@ variable "drive_letter" {
 
 variable "public_key" {
     description = "The public SSH key to be added on the AWS EC2 instance."
+    default     = ""
 }
