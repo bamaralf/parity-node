@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/bamaralf/parity-node/tree/master.svg?style=svg)](https://circleci.com/gh/bamaralf/parity-node/tree/master)
-
 1) Link this repository to your CircleCI project.
 
 2) Add these vars to the CircleCI project and replace '{}' with the proper values:
@@ -10,5 +8,3 @@
 (Alternatively, run the steps on the ./circleci/README.md to add the environment variables to the CircleCI project.)
 
 3) Every push to the master branch will trigger the deploy.
-
-
